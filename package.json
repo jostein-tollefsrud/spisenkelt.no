@@ -7,6 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
+		"typegen": "sanity schema extract && sanity typegen generate",
 		"prettier": "prettier --write ."
 	},
 	"dependencies": {
