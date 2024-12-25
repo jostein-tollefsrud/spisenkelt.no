@@ -1,17 +1,14 @@
 import '../globals.css';
 
+import clsx from 'clsx';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist } from 'next/font/google';
 
 import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
-	subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
 	subsets: ['latin'],
 });
 
@@ -28,9 +25,15 @@ export default function RootLayout({
 	return (
 		<html lang="nb-NO">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={clsx(
+					geistSans.variable,
+					'min-h-screen',
+					'flex',
+					'flex-col'
+				)}
 			>
-				<main>{children}</main>
+				<Header />
+				<main className="flex-1">{children}</main>
 				<Footer />
 			</body>
 		</html>
