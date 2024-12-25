@@ -254,3 +254,139 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/sanity/lib/queries.ts
+// Variable: recipeBySlugQuery
+// Query: *[_type == "recipe" && slug.current == $slug][0]
+export type RecipeBySlugQueryResult = {
+	_id: string;
+	_type: 'recipe';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	mainImage?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		alt?: string;
+		_type: 'image';
+	};
+	categories?: {
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		_key: string;
+		[internalGroqTypeReferenceTo]?: 'category';
+	}[];
+	body?: (
+		| {
+				children?: {
+					marks?: string[];
+					text?: string;
+					_type: 'span';
+					_key: string;
+				}[];
+				style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'normal';
+				listItem?: 'bullet' | 'number';
+				markDefs?: {
+					href?: string;
+					_type: 'link';
+					_key: string;
+				}[];
+				level?: number;
+				_type: 'block';
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: 'reference';
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+				};
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				alt?: string;
+				_type: 'image';
+				_key: string;
+		  }
+	)[];
+} | null;
+// Variable: recipesQuery
+// Query: *[_type == "recipe"]
+export type RecipesQueryResult = {
+	_id: string;
+	_type: 'recipe';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+	slug?: Slug;
+	mainImage?: {
+		asset?: {
+			_ref: string;
+			_type: 'reference';
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+		};
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		alt?: string;
+		_type: 'image';
+	};
+	categories?: {
+		_ref: string;
+		_type: 'reference';
+		_weak?: boolean;
+		_key: string;
+		[internalGroqTypeReferenceTo]?: 'category';
+	}[];
+	body?: (
+		| {
+				children?: {
+					marks?: string[];
+					text?: string;
+					_type: 'span';
+					_key: string;
+				}[];
+				style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'normal';
+				listItem?: 'bullet' | 'number';
+				markDefs?: {
+					href?: string;
+					_type: 'link';
+					_key: string;
+				}[];
+				level?: number;
+				_type: 'block';
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: 'reference';
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+				};
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				alt?: string;
+				_type: 'image';
+				_key: string;
+		  }
+	)[];
+}[];
+
+// Query TypeMap
+import '@sanity/client';
+declare module '@sanity/client' {
+	interface SanityQueries {
+		'*[_type == "recipe" && slug.current == $slug][0]': RecipeBySlugQueryResult;
+		'*[_type == "recipe"]': RecipesQueryResult;
+	}
+}

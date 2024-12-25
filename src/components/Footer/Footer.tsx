@@ -6,11 +6,12 @@ export default function Footer() {
 			className={clsx(
 				'bg-primary',
 				'text-primary-foreground',
-				'p-4',
 				'text-center'
 			)}
 		>
-			<div className={clsx('max-w-7xl', 'mx-auto')}>spisenkelt.no</div>
+			<div className={clsx('max-w-7xl', 'mx-auto', 'p-4')}>
+				spisenkelt.no
+			</div>
 		</footer>
 	);
 }
