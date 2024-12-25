@@ -28,6 +28,9 @@ export default defineConfig({
 	tasks: {
 		enabled: false,
 	},
+	scheduledPublishing: {
+		enabled: false,
+	},
 	document: {
 		comments: {
 			enabled: false,
