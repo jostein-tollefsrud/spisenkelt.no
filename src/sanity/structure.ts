@@ -1,7 +1,6 @@
 import type { StructureResolver } from 'sanity/structure';
 
 import {
-	authorTypeName,
 	categoryTypeName,
 	recipeTypeName,
 } from './schemaTypes/constants';
@@ -9,11 +8,10 @@ import {
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
 	S.list()
-		.title('Blog')
+		.title('Content')
 		.items([
-			S.documentTypeListItem(recipeTypeName).title('Posts'),
+			S.documentTypeListItem(recipeTypeName).title('Recipes'),
 			S.documentTypeListItem(categoryTypeName).title('Categories'),
-			S.documentTypeListItem(authorTypeName).title('Authors'),
 			S.divider(),
 			...S.documentTypeListItems().filter(
 				(item) =>
@@ -21,7 +19,6 @@ export const structure: StructureResolver = (S) =>
 					![
 						recipeTypeName,
 						categoryTypeName,
-						authorTypeName,
 					].includes(item.getId() ?? '')
 			),
 		]);
