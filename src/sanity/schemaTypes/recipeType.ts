@@ -8,16 +8,18 @@ import {
 } from './constants';
 
 export const recipeType = defineType({
+	title: 'Oppskrift',
 	name: recipeTypeName,
-	title: 'Recipe',
 	type: 'document',
 	icon: DocumentTextIcon,
 	fields: [
 		defineField({
+			title: 'Tittel',
 			name: 'title',
 			type: 'string',
 		}),
 		defineField({
+			title: 'Slug',
 			name: 'slug',
 			type: 'slug',
 			options: {
@@ -25,6 +27,7 @@ export const recipeType = defineType({
 			},
 		}),
 		defineField({
+			title: 'Hovedbilde',
 			name: 'mainImage',
 			type: 'image',
 			options: {
@@ -32,13 +35,14 @@ export const recipeType = defineType({
 			},
 			fields: [
 				{
+					title: 'Alternativ tekst',
 					name: 'alt',
 					type: 'string',
-					title: 'Alternative text',
 				},
 			],
 		}),
 		defineField({
+			title: 'Kategorier',
 			name: 'categories',
 			type: 'array',
 			of: [
@@ -49,6 +53,7 @@ export const recipeType = defineType({
 			],
 		}),
 		defineField({
+			title: 'Innhold',
 			name: 'body',
 			type: blockContentTypeName,
 		}),
@@ -56,19 +61,10 @@ export const recipeType = defineType({
 	preview: {
 		select: {
 			title: 'title',
-			author: 'author.name',
 			media: 'mainImage',
 		},
-		prepare({
-			author,
-			title,
-			media,
-		}: {
-			author?: string;
-			title?: string;
-			media?: string;
-		}) {
-			return { title, media, subtitle: author && `by ${author}` };
+		prepare({ title, media }: { title?: string; media?: string }) {
+			return { title, media };
 		},
 	},
 });

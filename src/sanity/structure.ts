@@ -5,10 +5,10 @@ import { categoryTypeName, recipeTypeName } from './schemaTypes/constants';
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
 	S.list()
-		.title('Content')
+		.title('Innhold')
 		.items([
-			S.documentTypeListItem(recipeTypeName).title('Recipes'),
-			S.documentTypeListItem(categoryTypeName).title('Categories'),
+			S.documentTypeListItem(recipeTypeName).title('Oppskrifter'),
+			S.documentTypeListItem(categoryTypeName).title('Kategorier'),
 			S.divider(),
 			...S.documentTypeListItems().filter(
 				(item) =>

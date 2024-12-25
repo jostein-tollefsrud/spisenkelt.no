@@ -5,15 +5,17 @@ import { categoryTypeName } from './constants';
 
 export const categoryType = defineType({
 	name: categoryTypeName,
-	title: 'Category',
+	title: 'Kategori',
 	type: 'document',
 	icon: TagIcon,
 	fields: [
 		defineField({
+			title: 'Tittel',
 			name: 'title',
 			type: 'string',
 		}),
 		defineField({
+			title: 'Slug',
 			name: 'slug',
 			type: 'slug',
 			options: {
@@ -21,6 +23,7 @@ export const categoryType = defineType({
 			},
 		}),
 		defineField({
+			title: 'Beskrivelse',
 			name: 'description',
 			type: 'text',
 		}),

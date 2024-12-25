@@ -95,7 +95,8 @@ export interface Recipe {
 		_key: string;
 		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (| {
+	body?: (
+		| {
 				children?: {
 					marks?: string[];
 					text?: string;
@@ -125,7 +126,8 @@ export interface Recipe {
 				alt?: string;
 				_type: 'image';
 				_key: string;
-		  })[];
+		  }
+	)[];
 }
 
 export interface Category {
@@ -145,7 +147,8 @@ export interface Slug {
 	source?: string;
 }
 
-export type BlockContent = (| {
+export type BlockContent = (
+	| {
 			children?: {
 				marks?: string[];
 				text?: string;
@@ -175,7 +178,8 @@ export type BlockContent = (| {
 			alt?: string;
 			_type: 'image';
 			_key: string;
-	  })[];
+	  }
+)[];
 
 export interface SanityImageCrop {
 	_type: 'sanity.imageCrop';
@@ -279,7 +283,8 @@ export type RecipeBySlugQueryResult = {
 		_key: string;
 		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (| {
+	body?: (
+		| {
 				children?: {
 					marks?: string[];
 					text?: string;
@@ -309,7 +314,8 @@ export type RecipeBySlugQueryResult = {
 				alt?: string;
 				_type: 'image';
 				_key: string;
-		  })[];
+		  }
+	)[];
 } | null;
 // Variable: recipesQuery
 // Query: *[_type == "recipe"]{		...,		mainImage {			//groq	hotspot,	crop,	alt,	asset->{		_id,		metadata {			lqip		}	}		}	}
@@ -339,7 +345,8 @@ export type RecipesQueryResult = {
 		_key: string;
 		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (| {
+	body?: (
+		| {
 				children?: {
 					marks?: string[];
 					text?: string;
@@ -369,7 +376,8 @@ export type RecipesQueryResult = {
 				alt?: string;
 				_type: 'image';
 				_key: string;
-		  })[];
+		  }
+	)[];
 }[];
 
 // Query TypeMap

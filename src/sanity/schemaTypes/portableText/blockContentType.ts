@@ -8,6 +8,7 @@ import { baseBlockStyles } from './baseBlockStyles';
 
 export const imageArrayMember = defineArrayMember({
 	type: 'image',
+	title: 'Bilde',
 	icon: ImageIcon,
 	options: { hotspot: true },
 	fields: [
@@ -31,7 +32,7 @@ export const imageArrayMember = defineArrayMember({
  */
 
 export const blockContentType = defineType({
-	title: 'Block Content',
+	title: 'Blokkinnhold',
 	name: blockContentTypeName,
 	type: 'array',
 	of: [
