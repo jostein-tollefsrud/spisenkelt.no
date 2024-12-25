@@ -37,7 +37,7 @@ export default defineConfig({
 	beta: {
 		create: {
 			startInCreateEnabled: false,
-		}
+		},
 	},
 	document: {
 		comments: {
