@@ -31,6 +31,9 @@ export default defineConfig({
 	scheduledPublishing: {
 		enabled: false,
 	},
+	announcements: {
+		enabled: false,
+	},
 	document: {
 		comments: {
 			enabled: false,
