@@ -1,6 +1,7 @@
 import { ImageIcon } from '@sanity/icons';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+import { blockContentTypeName } from '../constants';
 import { baseBlockLists } from './baseBlockLists';
 import { baseBlockMarks } from './baseBlockMarks';
 import { baseBlockStyles } from './baseBlockStyles';
@@ -31,7 +32,7 @@ export const imageArrayMember = defineArrayMember({
 
 export const blockContentType = defineType({
 	title: 'Block Content',
-	name: 'blockContent',
+	name: blockContentTypeName,
 	type: 'array',
 	of: [
 		defineArrayMember({

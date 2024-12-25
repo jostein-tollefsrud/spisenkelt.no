@@ -1,9 +1,16 @@
 import { DocumentTextIcon } from '@sanity/icons';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
-export const postType = defineType({
-	name: 'post',
-	title: 'Post',
+import {
+	authorTypeName,
+	blockContentTypeName,
+	categoryTypeName,
+	recipeTypeName,
+} from './constants';
+
+export const recipeType = defineType({
+	name: recipeTypeName,
+	title: 'Recipe',
 	type: 'document',
 	icon: DocumentTextIcon,
 	fields: [
@@ -21,7 +28,7 @@ export const postType = defineType({
 		defineField({
 			name: 'author',
 			type: 'reference',
-			to: { type: 'author' },
+			to: { type: authorTypeName },
 		}),
 		defineField({
 			name: 'mainImage',
@@ -43,7 +50,7 @@ export const postType = defineType({
 			of: [
 				defineArrayMember({
 					type: 'reference',
-					to: { type: 'category' },
+					to: { type: categoryTypeName },
 				}),
 			],
 		}),
@@ -53,7 +60,7 @@ export const postType = defineType({
 		}),
 		defineField({
 			name: 'body',
-			type: 'blockContent',
+			type: blockContentTypeName,
 		}),
 	],
 	preview: {

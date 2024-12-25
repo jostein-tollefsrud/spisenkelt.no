@@ -1,8 +1,10 @@
 import { UserIcon } from '@sanity/icons';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+import { authorTypeName } from './constants';
+
 export const authorType = defineType({
-	name: 'author',
+	name: authorTypeName,
 	title: 'Author',
 	type: 'document',
 	icon: UserIcon,
