@@ -34,6 +34,11 @@ export default defineConfig({
 	announcements: {
 		enabled: false,
 	},
+	beta: {
+		create: {
+			startInCreateEnabled: false,
+		}
+	},
 	document: {
 		comments: {
 			enabled: false,
