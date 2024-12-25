@@ -95,8 +95,7 @@ export interface Recipe {
 		_key: string;
 		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (
-		| {
+	body?: (| {
 				children?: {
 					marks?: string[];
 					text?: string;
@@ -126,8 +125,7 @@ export interface Recipe {
 				alt?: string;
 				_type: 'image';
 				_key: string;
-		  }
-	)[];
+		  })[];
 }
 
 export interface Category {
@@ -147,8 +145,7 @@ export interface Slug {
 	source?: string;
 }
 
-export type BlockContent = (
-	| {
+export type BlockContent = (| {
 			children?: {
 				marks?: string[];
 				text?: string;
@@ -178,8 +175,7 @@ export type BlockContent = (
 			alt?: string;
 			_type: 'image';
 			_key: string;
-	  }
-)[];
+	  })[];
 
 export interface SanityImageCrop {
 	_type: 'sanity.imageCrop';
@@ -256,7 +252,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: recipeBySlugQuery
-// Query: *[_type == "recipe" && slug.current == $slug][0]
+// Query: *[_type == "recipe" && slug.current == $slug][0]{		...,		mainImage {			//groq	hotspot,	crop,	alt,	asset->{		_id,		metadata {			lqip		}	}		}	}
 export type RecipeBySlugQueryResult = {
 	_id: string;
 	_type: 'recipe';
@@ -265,18 +261,17 @@ export type RecipeBySlugQueryResult = {
 	_rev: string;
 	title?: string;
 	slug?: Slug;
-	mainImage?: {
-		asset?: {
-			_ref: string;
-			_type: 'reference';
-			_weak?: boolean;
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-		};
-		hotspot?: SanityImageHotspot;
-		crop?: SanityImageCrop;
-		alt?: string;
-		_type: 'image';
-	};
+	mainImage: {
+		hotspot: SanityImageHotspot | null;
+		crop: SanityImageCrop | null;
+		alt: string | null;
+		asset: {
+			_id: string;
+			metadata: {
+				lqip: string | null;
+			} | null;
+		} | null;
+	} | null;
 	categories?: {
 		_ref: string;
 		_type: 'reference';
@@ -284,8 +279,7 @@ export type RecipeBySlugQueryResult = {
 		_key: string;
 		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (
-		| {
+	body?: (| {
 				children?: {
 					marks?: string[];
 					text?: string;
@@ -315,11 +309,10 @@ export type RecipeBySlugQueryResult = {
 				alt?: string;
 				_type: 'image';
 				_key: string;
-		  }
-	)[];
+		  })[];
 } | null;
 // Variable: recipesQuery
-// Query: *[_type == "recipe"]
+// Query: *[_type == "recipe"]{		...,		mainImage {			//groq	hotspot,	crop,	alt,	asset->{		_id,		metadata {			lqip		}	}		}	}
 export type RecipesQueryResult = {
 	_id: string;
 	_type: 'recipe';
@@ -328,18 +321,17 @@ export type RecipesQueryResult = {
 	_rev: string;
 	title?: string;
 	slug?: Slug;
-	mainImage?: {
-		asset?: {
-			_ref: string;
-			_type: 'reference';
-			_weak?: boolean;
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-		};
-		hotspot?: SanityImageHotspot;
-		crop?: SanityImageCrop;
-		alt?: string;
-		_type: 'image';
-	};
+	mainImage: {
+		hotspot: SanityImageHotspot | null;
+		crop: SanityImageCrop | null;
+		alt: string | null;
+		asset: {
+			_id: string;
+			metadata: {
+				lqip: string | null;
+			} | null;
+		} | null;
+	} | null;
 	categories?: {
 		_ref: string;
 		_type: 'reference';
@@ -347,8 +339,7 @@ export type RecipesQueryResult = {
 		_key: string;
 		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (
-		| {
+	body?: (| {
 				children?: {
 					marks?: string[];
 					text?: string;
@@ -378,15 +369,14 @@ export type RecipesQueryResult = {
 				alt?: string;
 				_type: 'image';
 				_key: string;
-		  }
-	)[];
+		  })[];
 }[];
 
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
 	interface SanityQueries {
-		'*[_type == "recipe" && slug.current == $slug][0]': RecipeBySlugQueryResult;
-		'*[_type == "recipe"]': RecipesQueryResult;
+		'*[_type == "recipe" && slug.current == $slug][0]{\n\t\t...,\n\t\tmainImage {\n\t\t\t//groq\n\thotspot,\n\tcrop,\n\talt,\n\tasset->{\n\t\t_id,\n\t\tmetadata {\n\t\t\tlqip\n\t\t}\n\t}\n\n\t\t}\n\t}': RecipeBySlugQueryResult;
+		'\n\t*[_type == "recipe"]{\n\t\t...,\n\t\tmainImage {\n\t\t\t//groq\n\thotspot,\n\tcrop,\n\talt,\n\tasset->{\n\t\t_id,\n\t\tmetadata {\n\t\t\tlqip\n\t\t}\n\t}\n\n\t\t}\n\t}\n': RecipesQueryResult;
 	}
 }
