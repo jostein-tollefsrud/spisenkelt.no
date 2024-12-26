@@ -1,11 +1,7 @@
-import { DocumentTextIcon } from '@sanity/icons';
+import { DocumentTextIcon, OlistIcon } from '@sanity/icons';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
-import {
-	blockContentTypeName,
-	categoryTypeName,
-	recipeTypeName,
-} from './constants';
+import { ingredientTypeName, recipeTypeName } from './constants';
 
 export const recipeType = defineType({
 	title: 'Oppskrift',
@@ -42,20 +38,45 @@ export const recipeType = defineType({
 			],
 		}),
 		defineField({
-			title: 'Kategorier',
-			name: 'categories',
+			title: 'Ingredienser',
+			name: 'ingredients',
 			type: 'array',
 			of: [
 				defineArrayMember({
 					type: 'reference',
-					to: { type: categoryTypeName },
+					title: 'Ingrediens',
+					to: { type: ingredientTypeName },
 				}),
 			],
 		}),
 		defineField({
-			title: 'Innhold',
-			name: 'body',
-			type: blockContentTypeName,
+			title: 'Fremgangsmåte',
+			name: 'instructions',
+			type: 'array',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					name: 'step',
+					title: 'Steg',
+					icon: OlistIcon,
+					fields: [
+						defineField({
+							type: 'array',
+							name: 'description',
+							title: 'Beskrivelse',
+							of: [
+								defineArrayMember({
+									type: 'block',
+									name: 'block',
+									styles: [
+										{ title: 'Normal', value: 'normal' },
+									],
+								}),
+							],
+						}),
+					],
+				}),
+			],
 		}),
 	],
 	preview: {

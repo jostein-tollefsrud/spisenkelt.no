@@ -88,57 +88,35 @@ export interface Recipe {
 		alt?: string;
 		_type: 'image';
 	};
-	categories?: {
+	ingredients?: {
 		_ref: string;
 		_type: 'reference';
 		_weak?: boolean;
 		_key: string;
-		[internalGroqTypeReferenceTo]?: 'category';
+		[internalGroqTypeReferenceTo]?: 'ingredient';
 	}[];
-	body?: (
-		| {
-				children?: {
-					marks?: string[];
-					text?: string;
-					_type: 'span';
-					_key: string;
-				}[];
-				style?: 'normal' | 'h2' | 'h3' | 'h4' | 'blockquote';
-				listItem?: 'bullet' | 'number';
-				markDefs?: {
-					href?: string;
-					_type: 'link';
-					_key: string;
-				}[];
-				level?: number;
-				_type: 'block';
+	instructions?: {
+		description?: {
+			children?: {
+				marks?: string[];
+				text?: string;
+				_type: 'span';
 				_key: string;
-		  }
-		| {
-				asset?: {
-					_ref: string;
-					_type: 'reference';
-					_weak?: boolean;
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-				};
-				hotspot?: SanityImageHotspot;
-				crop?: SanityImageCrop;
-				alt?: string;
-				_type: 'image';
+			}[];
+			style?: 'normal';
+			listItem?: 'bullet' | 'number';
+			markDefs?: {
+				href?: string;
+				_type: 'link';
 				_key: string;
-		  }
-	)[];
-}
-
-export interface Category {
-	_id: string;
-	_type: 'category';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	title?: string;
-	slug?: Slug;
-	description?: string;
+			}[];
+			level?: number;
+			_type: 'block';
+			_key: string;
+		}[];
+		_type: 'step';
+		_key: string;
+	}[];
 }
 
 export interface Slug {
@@ -147,8 +125,16 @@ export interface Slug {
 	source?: string;
 }
 
-export type BlockContent = (
-	| {
+export interface Ingredient {
+	_id: string;
+	_type: 'ingredient';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title?: string;
+}
+
+export type BlockContent = (| {
 			children?: {
 				marks?: string[];
 				text?: string;
@@ -178,8 +164,7 @@ export type BlockContent = (
 			alt?: string;
 			_type: 'image';
 			_key: string;
-	  }
-)[];
+	  })[];
 
 export interface SanityImageCrop {
 	_type: 'sanity.imageCrop';
@@ -245,8 +230,8 @@ export type AllSanitySchemaTypes =
 	| SanityFileAsset
 	| Geopoint
 	| Recipe
-	| Category
 	| Slug
+	| Ingredient
 	| BlockContent
 	| SanityImageCrop
 	| SanityImageHotspot
@@ -256,7 +241,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: recipeBySlugQuery
-// Query: *[_type == "recipe" && slug.current == $slug][0]{		...,		mainImage {			//groq	hotspot,	crop,	alt,	asset->{		_id,		metadata {			lqip		}	}		}	}
+// Query: *[_type == "recipe" && slug.current == $slug][0]{		...,		mainImage {			//groq	hotspot,	crop,	alt,	asset->{		_id,		metadata {			lqip		}	}		},		ingredients[]->{			...		}	}
 export type RecipeBySlugQueryResult = {
 	_id: string;
 	_type: 'recipe';
@@ -276,46 +261,36 @@ export type RecipeBySlugQueryResult = {
 			} | null;
 		} | null;
 	} | null;
-	categories?: {
-		_ref: string;
-		_type: 'reference';
-		_weak?: boolean;
+	ingredients: {
+		_id: string;
+		_type: 'ingredient';
+		_createdAt: string;
+		_updatedAt: string;
+		_rev: string;
+		title?: string;
+	}[] | null;
+	instructions?: {
+		description?: {
+			children?: {
+				marks?: string[];
+				text?: string;
+				_type: 'span';
+				_key: string;
+			}[];
+			style?: 'normal';
+			listItem?: 'bullet' | 'number';
+			markDefs?: {
+				href?: string;
+				_type: 'link';
+				_key: string;
+			}[];
+			level?: number;
+			_type: 'block';
+			_key: string;
+		}[];
+		_type: 'step';
 		_key: string;
-		[internalGroqTypeReferenceTo]?: 'category';
 	}[];
-	body?: (
-		| {
-				children?: {
-					marks?: string[];
-					text?: string;
-					_type: 'span';
-					_key: string;
-				}[];
-				style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'normal';
-				listItem?: 'bullet' | 'number';
-				markDefs?: {
-					href?: string;
-					_type: 'link';
-					_key: string;
-				}[];
-				level?: number;
-				_type: 'block';
-				_key: string;
-		  }
-		| {
-				asset?: {
-					_ref: string;
-					_type: 'reference';
-					_weak?: boolean;
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-				};
-				hotspot?: SanityImageHotspot;
-				crop?: SanityImageCrop;
-				alt?: string;
-				_type: 'image';
-				_key: string;
-		  }
-	)[];
 } | null;
 // Variable: recipesQuery
 // Query: *[_type == "recipe"]{		...,		mainImage {			//groq	hotspot,	crop,	alt,	asset->{		_id,		metadata {			lqip		}	}		}	}
@@ -338,53 +313,42 @@ export type RecipesQueryResult = {
 			} | null;
 		} | null;
 	} | null;
-	categories?: {
+	ingredients?: {
 		_ref: string;
 		_type: 'reference';
 		_weak?: boolean;
 		_key: string;
-		[internalGroqTypeReferenceTo]?: 'category';
+		[internalGroqTypeReferenceTo]?: 'ingredient';
 	}[];
-	body?: (
-		| {
-				children?: {
-					marks?: string[];
-					text?: string;
-					_type: 'span';
-					_key: string;
-				}[];
-				style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'normal';
-				listItem?: 'bullet' | 'number';
-				markDefs?: {
-					href?: string;
-					_type: 'link';
-					_key: string;
-				}[];
-				level?: number;
-				_type: 'block';
+	instructions?: {
+		description?: {
+			children?: {
+				marks?: string[];
+				text?: string;
+				_type: 'span';
 				_key: string;
-		  }
-		| {
-				asset?: {
-					_ref: string;
-					_type: 'reference';
-					_weak?: boolean;
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-				};
-				hotspot?: SanityImageHotspot;
-				crop?: SanityImageCrop;
-				alt?: string;
-				_type: 'image';
+			}[];
+			style?: 'normal';
+			listItem?: 'bullet' | 'number';
+			markDefs?: {
+				href?: string;
+				_type: 'link';
 				_key: string;
-		  }
-	)[];
+			}[];
+			level?: number;
+			_type: 'block';
+			_key: string;
+		}[];
+		_type: 'step';
+		_key: string;
+	}[];
 }[];
 
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
 	interface SanityQueries {
-		'*[_type == "recipe" && slug.current == $slug][0]{\n\t\t...,\n\t\tmainImage {\n\t\t\t//groq\n\thotspot,\n\tcrop,\n\talt,\n\tasset->{\n\t\t_id,\n\t\tmetadata {\n\t\t\tlqip\n\t\t}\n\t}\n\n\t\t}\n\t}': RecipeBySlugQueryResult;
+		'*[_type == "recipe" && slug.current == $slug][0]{\n\t\t...,\n\t\tmainImage {\n\t\t\t//groq\n\thotspot,\n\tcrop,\n\talt,\n\tasset->{\n\t\t_id,\n\t\tmetadata {\n\t\t\tlqip\n\t\t}\n\t}\n\n\t\t},\n\t\tingredients[]->{\n\t\t\t...\n\t\t}\n\t}': RecipeBySlugQueryResult;
 		'\n\t*[_type == "recipe"]{\n\t\t...,\n\t\tmainImage {\n\t\t\t//groq\n\thotspot,\n\tcrop,\n\talt,\n\tasset->{\n\t\t_id,\n\t\tmetadata {\n\t\t\tlqip\n\t\t}\n\t}\n\n\t\t}\n\t}\n': RecipesQueryResult;
 	}
 }

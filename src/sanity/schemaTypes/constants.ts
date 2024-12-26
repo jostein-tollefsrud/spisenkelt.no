@@ -1,4 +1,4 @@
 export const recipeTypeName = 'recipe';
-export const categoryTypeName = 'category';
+export const ingredientTypeName = 'ingredient';
 
 export const blockContentTypeName = 'blockContent';

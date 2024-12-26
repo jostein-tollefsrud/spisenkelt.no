@@ -2,7 +2,7 @@ import { defineQuery } from 'next-sanity';
 
 import { recipeTypeName } from '../schemaTypes/constants';
 
-const imageFields = `//groq
+const imageFragment = `//groq
 	hotspot,
 	crop,
 	alt,
@@ -18,7 +18,10 @@ export const recipeBySlugQuery = defineQuery(
 	`*[_type == "${recipeTypeName}" && slug.current == $slug][0]{
 		...,
 		mainImage {
-			${imageFields}
+			${imageFragment}
+		},
+		ingredients[]->{
+			...
 		}
 	}`
 );
@@ -27,7 +30,7 @@ export const recipesQuery = defineQuery(`
 	*[_type == "${recipeTypeName}"]{
 		...,
 		mainImage {
-			${imageFields}
+			${imageFragment}
 		}
 	}
 `);
