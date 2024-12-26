@@ -38,6 +38,18 @@ export const recipeType = defineType({
 			],
 		}),
 		defineField({
+			type: 'array',
+			name: 'description',
+			title: 'Beskrivelse',
+			of: [
+				defineArrayMember({
+					type: 'block',
+					name: 'block',
+					styles: [{ title: 'Normal', value: 'normal' }],
+				}),
+			],
+		}),
+		defineField({
 			title: 'Ingredienser',
 			name: 'ingredients',
 			type: 'array',

@@ -34,24 +34,23 @@ export default function Step({ step, number }: Props) {
 				checked && ['bg-green-100', 'text-green-950']
 			)}
 		>
-			<input
-				type="checkbox"
-				checked={checked}
-				id={`step-${step._key}`}
-				onChange={handleCheckboxChange}
-				className={clsx(
-					'mt-[0.3rem]',
-					'after:inset-0',
-					'after:absolute'
-				)}
-			/>
-			<label
-				htmlFor={`step-${step._key}`}
-				className={clsx('flex', 'gap-2')}
-			>
+			<label>
+				<span className="sr-only">Gjennomført steg {number}</span>
+				<input
+					type="checkbox"
+					checked={checked}
+					onChange={handleCheckboxChange}
+					className={clsx(
+						'mt-[0.3rem]',
+						'after:inset-0',
+						'after:absolute'
+					)}
+				/>
+			</label>
+			<div className={clsx('flex', 'gap-2')}>
 				<span className="font-bold">{number}.</span>{' '}
 				{step.description && <PortableText value={step.description} />}
-			</label>
+			</div>
 		</li>
 	);
 }

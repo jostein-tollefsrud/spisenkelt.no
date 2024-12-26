@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { RecipeBySlugQueryResult } from '@/sanity/types';
 
+import PortableText from '../PortableText/PortableText';
 import Instructions from './Instructions';
 import MainImage from './MainImage';
 
@@ -18,20 +19,16 @@ export default function RecipePage({ recipe }: Props) {
 	return (
 		<div className={clsx('max-w-7xl', 'mx-auto', 'px-4', 'pb-8')}>
 			{recipe.mainImage && <MainImage image={recipe.mainImage} />}
-			<h1
-				className={clsx(
-					'font-bold',
-					'text-4xl',
-					'py-4',
-					'mt-4',
-					'mb-8',
-					'border-y',
-					'border-primary/20',
-					'text-center'
-				)}
-			>
-				{recipe.title}
-			</h1>
+			<div className={clsx('py-8', 'mb-8', 'text-center')}>
+				<div className={clsx('max-w-2xl', 'mx-auto', 'text-pretty')}>
+					<h1 className={clsx('font-bold', 'text-4xl', 'mb-2')}>
+						{recipe.title}
+					</h1>
+					{recipe.description && (
+						<PortableText value={recipe.description} />
+					)}
+				</div>
+			</div>
 			<div className={clsx('grid', 'md:grid-cols-3', 'gap-8')}>
 				<div className={clsx('md:col-span-1')}>
 					<h2 id="ingredients" className={clsx('font-bold', 'mb-2')}>

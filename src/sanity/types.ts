@@ -88,6 +88,24 @@ export interface Recipe {
 		alt?: string;
 		_type: 'image';
 	};
+	description?: {
+		children?: {
+			marks?: string[];
+			text?: string;
+			_type: 'span';
+			_key: string;
+		}[];
+		style?: 'normal';
+		listItem?: 'bullet' | 'number';
+		markDefs?: {
+			href?: string;
+			_type: 'link';
+			_key: string;
+		}[];
+		level?: number;
+		_type: 'block';
+		_key: string;
+	}[];
 	ingredients?: {
 		_ref: string;
 		_type: 'reference';
@@ -261,6 +279,24 @@ export type RecipeBySlugQueryResult = {
 			} | null;
 		} | null;
 	} | null;
+	description?: {
+		children?: {
+			marks?: string[];
+			text?: string;
+			_type: 'span';
+			_key: string;
+		}[];
+		style?: 'normal';
+		listItem?: 'bullet' | 'number';
+		markDefs?: {
+			href?: string;
+			_type: 'link';
+			_key: string;
+		}[];
+		level?: number;
+		_type: 'block';
+		_key: string;
+	}[];
 	ingredients: {
 		_id: string;
 		_type: 'ingredient';
@@ -313,6 +349,24 @@ export type RecipesQueryResult = {
 			} | null;
 		} | null;
 	} | null;
+	description?: {
+		children?: {
+			marks?: string[];
+			text?: string;
+			_type: 'span';
+			_key: string;
+		}[];
+		style?: 'normal';
+		listItem?: 'bullet' | 'number';
+		markDefs?: {
+			href?: string;
+			_type: 'link';
+			_key: string;
+		}[];
+		level?: number;
+		_type: 'block';
+		_key: string;
+	}[];
 	ingredients?: {
 		_ref: string;
 		_type: 'reference';
