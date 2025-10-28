@@ -1,3 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Work Sans", sans-serif;
+	--font-display: "Buenard", serif;
+
+    /*	Body short */
+	--text-body-short-lg: 1.125rem;
+	--text-body-short-lg--font-weight: 400;
+	--text-body-short-lg--letter-spacing: 0.01;
+	--text-body-short-lg--line-height: 1.5;
+
+    /* Heading	*/
+	--text-heading-2xl: 2.25rem;
+	--text-heading-2xl--font-weight: 700;
+	--text-heading-2xl--letter-spacing: 0.01;
+	--text-heading-2xl--line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	@apply font-display;
+	@apply font-bold;
+	@apply mb-2;
+}

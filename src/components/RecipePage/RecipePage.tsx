@@ -21,17 +21,19 @@ export default function RecipePage({ recipe }: Props) {
 			{recipe.mainImage && <MainImage image={recipe.mainImage} />}
 			<div className={clsx('py-8', 'mb-8', 'text-center')}>
 				<div className={clsx('max-w-2xl', 'mx-auto', 'text-pretty')}>
-					<h1 className={clsx('font-bold', 'text-4xl', 'mb-2')}>
+					<h1 className={clsx('text-heading-2xl')}>
 						{recipe.title}
 					</h1>
 					{recipe.description && (
-						<PortableText value={recipe.description} />
+						<div className={clsx('text-body-short-lg')}>
+							<PortableText value={recipe.description} />
+						</div>
 					)}
 				</div>
 			</div>
 			<div className={clsx('grid', 'md:grid-cols-3', 'gap-8')}>
 				<div className={clsx('md:col-span-1')}>
-					<h2 id="ingredients" className={clsx('font-bold', 'mb-2')}>
+					<h2 id="ingredients">
 						Ingredienser
 					</h2>
 
@@ -43,7 +45,7 @@ export default function RecipePage({ recipe }: Props) {
 				</div>
 
 				<div className={clsx('md:col-span-2')}>
-					<h2 id="instructions" className={clsx('font-bold', 'mb-2')}>
+					<h2 id="instructions">
 						Fremgangsmåte
 					</h2>
 
