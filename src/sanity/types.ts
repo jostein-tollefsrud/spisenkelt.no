@@ -13,61 +13,6 @@
  */
 
 // Source: schema.json
-export interface SanityImagePaletteSwatch {
-	_type: 'sanity.imagePaletteSwatch';
-	background?: string;
-	foreground?: string;
-	population?: number;
-	title?: string;
-}
-
-export interface SanityImagePalette {
-	_type: 'sanity.imagePalette';
-	darkMuted?: SanityImagePaletteSwatch;
-	lightVibrant?: SanityImagePaletteSwatch;
-	darkVibrant?: SanityImagePaletteSwatch;
-	vibrant?: SanityImagePaletteSwatch;
-	dominant?: SanityImagePaletteSwatch;
-	lightMuted?: SanityImagePaletteSwatch;
-	muted?: SanityImagePaletteSwatch;
-}
-
-export interface SanityImageDimensions {
-	_type: 'sanity.imageDimensions';
-	height?: number;
-	width?: number;
-	aspectRatio?: number;
-}
-
-export interface SanityFileAsset {
-	_id: string;
-	_type: 'sanity.fileAsset';
-	_createdAt: string;
-	_updatedAt: string;
-	_rev: string;
-	originalFilename?: string;
-	label?: string;
-	title?: string;
-	description?: string;
-	altText?: string;
-	sha1hash?: string;
-	extension?: string;
-	mimeType?: string;
-	size?: number;
-	assetId?: string;
-	uploadId?: string;
-	path?: string;
-	url?: string;
-	source?: SanityAssetSourceData;
-}
-
-export interface Geopoint {
-	_type: 'geopoint';
-	lat?: number;
-	lng?: number;
-	alt?: number;
-}
-
 export interface Recipe {
 	_id: string;
 	_type: 'recipe';
@@ -83,6 +28,7 @@ export interface Recipe {
 			_weak?: boolean;
 			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
 		};
+		media?: unknown;
 		hotspot?: SanityImageHotspot;
 		crop?: SanityImageCrop;
 		alt?: string;
@@ -137,12 +83,6 @@ export interface Recipe {
 	}[];
 }
 
-export interface Slug {
-	_type: 'slug';
-	current?: string;
-	source?: string;
-}
-
 export interface Ingredient {
 	_id: string;
 	_type: 'ingredient';
@@ -177,12 +117,47 @@ export type BlockContent = (| {
 				_weak?: boolean;
 				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
 			};
+			media?: unknown;
 			hotspot?: SanityImageHotspot;
 			crop?: SanityImageCrop;
 			alt?: string;
 			_type: 'image';
 			_key: string;
 	  })[];
+
+export interface SanityImagePaletteSwatch {
+	_type: 'sanity.imagePaletteSwatch';
+	background?: string;
+	foreground?: string;
+	population?: number;
+	title?: string;
+}
+
+export interface SanityImagePalette {
+	_type: 'sanity.imagePalette';
+	darkMuted?: SanityImagePaletteSwatch;
+	lightVibrant?: SanityImagePaletteSwatch;
+	darkVibrant?: SanityImagePaletteSwatch;
+	vibrant?: SanityImagePaletteSwatch;
+	dominant?: SanityImagePaletteSwatch;
+	lightMuted?: SanityImagePaletteSwatch;
+	muted?: SanityImagePaletteSwatch;
+}
+
+export interface SanityImageDimensions {
+	_type: 'sanity.imageDimensions';
+	height?: number;
+	width?: number;
+	aspectRatio?: number;
+}
+
+export interface SanityImageHotspot {
+	_type: 'sanity.imageHotspot';
+	x?: number;
+	y?: number;
+	height?: number;
+	width?: number;
+}
 
 export interface SanityImageCrop {
 	_type: 'sanity.imageCrop';
@@ -192,12 +167,26 @@ export interface SanityImageCrop {
 	right?: number;
 }
 
-export interface SanityImageHotspot {
-	_type: 'sanity.imageHotspot';
-	x?: number;
-	y?: number;
-	height?: number;
-	width?: number;
+export interface SanityFileAsset {
+	_id: string;
+	_type: 'sanity.fileAsset';
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	source?: SanityAssetSourceData;
 }
 
 export interface SanityImageAsset {
@@ -223,13 +212,6 @@ export interface SanityImageAsset {
 	source?: SanityAssetSourceData;
 }
 
-export interface SanityAssetSourceData {
-	_type: 'sanity.assetSourceData';
-	name?: string;
-	id?: string;
-	url?: string;
-}
-
 export interface SanityImageMetadata {
 	_type: 'sanity.imageMetadata';
 	location?: Geopoint;
@@ -241,21 +223,41 @@ export interface SanityImageMetadata {
 	isOpaque?: boolean;
 }
 
+export interface Geopoint {
+	_type: 'geopoint';
+	lat?: number;
+	lng?: number;
+	alt?: number;
+}
+
+export interface Slug {
+	_type: 'slug';
+	current?: string;
+	source?: string;
+}
+
+export interface SanityAssetSourceData {
+	_type: 'sanity.assetSourceData';
+	name?: string;
+	id?: string;
+	url?: string;
+}
+
 export type AllSanitySchemaTypes =
+	| Recipe
+	| Ingredient
+	| BlockContent
 	| SanityImagePaletteSwatch
 	| SanityImagePalette
 	| SanityImageDimensions
-	| SanityFileAsset
-	| Geopoint
-	| Recipe
-	| Slug
-	| Ingredient
-	| BlockContent
-	| SanityImageCrop
 	| SanityImageHotspot
+	| SanityImageCrop
+	| SanityFileAsset
 	| SanityImageAsset
-	| SanityAssetSourceData
-	| SanityImageMetadata;
+	| SanityImageMetadata
+	| Geopoint
+	| Slug
+	| SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: recipeBySlugQuery

@@ -1,17 +1,16 @@
 import pluginNext from '@next/eslint-plugin-next';
+import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 
-const eslintConfig = [
+export default defineConfig([
 	eslintConfigPrettier,
-	...tseslint.config({
-		extends: [
-			...tseslint.configs.recommendedTypeChecked,
-			...tseslint.configs.strictTypeChecked,
-			...tseslint.configs.stylisticTypeChecked,
-		],
+	...tseslint.configs.recommendedTypeChecked,
+	...tseslint.configs.strictTypeChecked,
+	...tseslint.configs.stylisticTypeChecked,
+	{
 		languageOptions: {
 			parserOptions: {
 				projectService: {
@@ -22,7 +21,7 @@ const eslintConfig = [
 		rules: {
 			'@typescript-eslint/restrict-template-expressions': 'off',
 		},
-	}),
+	},
 	{
 		plugins: {
 			'@next/next': pluginNext,
@@ -59,6 +58,4 @@ const eslintConfig = [
 	{
 		ignores: ['.next/**', 'node_modules/**'],
 	},
-];
-
-export default eslintConfig;
+]);
